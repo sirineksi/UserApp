@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var username = UserDefaults.standard.string(forKey: "username") ?? ""
+    @State private var password = UserDefaults.standard.string(forKey: "password") ?? ""
+    @State private var rememberMe = false
+    @State private var isLoggedIn = false
+    @State private var isLoginError = false
+    @State private var showRegisterView = false
+    
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if isLoggedIn {
+            WelcomeView(username: username, password: password, rememberMe: rememberMe, isLoggedIn: $isLoggedIn )
+        }else if showRegisterView {
+            RegisterView()
+            
+        }else {
+            LoginView(username: $username, password: $password, rememberMe: $rememberMe, isLoggedIn: $isLoggedIn, isLoginError: $isLoginError)
+        }
     }
 }
 
@@ -19,3 +33,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
