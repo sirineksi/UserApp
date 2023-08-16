@@ -18,7 +18,7 @@ struct ContentView: View {
     
     var body: some View {
         if isLoggedIn {
-            WelcomeView(username: username, password: password, rememberMe: rememberMe, isLoggedIn: $isLoggedIn )
+            WelcomeView( isLoggedIn: $isLoggedIn )
         }else if showRegisterView {
             RegisterView()
             

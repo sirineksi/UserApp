@@ -21,7 +21,15 @@ struct LoginView: View {
             Toggle("Beni Hatırla", isOn: $rememberMe).padding()
             Button("Giriş Yap") {
                 if username == "Melis" && password == "12345" {
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(password, forKey: "password")
+                    if rememberMe {
+                        UserDefaults.standard.set(true, forKey: "rememberMe")
+                    }else{
+                        UserDefaults.standard.removeObject(forKey: "rememberMe")
+                    }
                     isLoggedIn = true
+                    UserDefaults.standard.string(forKey: "")
                 }else {
                     isLoginError = true
                 }

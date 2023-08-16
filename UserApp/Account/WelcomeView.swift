@@ -8,25 +8,25 @@
 import SwiftUI
 
 struct WelcomeView: View {
-    var username: String
-    var password: String
-    var rememberMe: Bool
+    @State private var rememberedUsername = UserDefaults.standard.string(forKey: "username")
+    @State private var rememberedPassword = UserDefaults.standard.string(forKey: "password")
+    @State private var rememberedRememberMe = UserDefaults.standard.string(forKey: "rememberMe")
     @Binding var isLoggedIn: Bool
     
     var body: some View {
         VStack{
-            Text("Hoşgeldiniz, \(username)!"  )
+            Text("Hoşgeldiniz, \(rememberedUsername ?? "" )!")
                 .font(.title)
                 .padding()
-            if rememberMe {
+            if (rememberedRememberMe != nil) {
                 Text("Beni hatırladınız!")
                     .foregroundColor(.green).padding()
             }else {
                 Text("Beni hatırlamadınız!")
                     .foregroundColor(.green).padding()
             }
-            Text("Kullanıcı Adı: \(username)")
-            Text("Şifre: \(password)")
+            Text("Kullanıcı Adı: \(rememberedUsername ?? "")").padding()
+            Text("Şifre: \(rememberedPassword ?? "")").padding()
             
             
             Button("Çıkış Yap") {
